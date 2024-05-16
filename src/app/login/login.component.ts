@@ -3,6 +3,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   usernameRegister : string= '';
   passwordRegister : string= '';
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private authService: AuthService,private loginService: LoginService, private router: Router) { }
 
   login(): void {
     this.loginService.login(this.username, this.password).subscribe(
@@ -24,8 +25,8 @@ export class LoginComponent {
         // Gérer la réponse de l'API
         if (response && response.message === 'Authentification réussie') {
           // Redirection vers la page HTML souhaitée
-          this.onLoginSuccess();
-        console.log(response);}
+          this.authService.login();
+          this.router.navigate(['/accueil']);}
         
       },
       
