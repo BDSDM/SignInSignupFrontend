@@ -1,10 +1,10 @@
 <!-- accueil.component.html -->
 
 <div>
-    <h1>Bienvenue sur notre site!</h1>
-    <p>C'est la page d'accueil.</p>
-  </div>
-  
+  <h1>Bienvenue sur notre site!</h1>
+  <p>C'est la page d'accueil.</p>
+</div>
+
 <button (click)="logOut()">Déconnexion</button>
 
 <div *ngIf="users.length > 0">
@@ -19,4 +19,3 @@
 <div *ngIf="users.length === 0">
   <p>No users found.</p>
 </div>
-

@@ -8,33 +8,43 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  username: string = '';
+  password: string = '';
+  usernameRegister: string = '';
+  passwordRegister: string = '';
 
-  username: string= '';
-  password: string= '';
-  usernameRegister : string= '';
-  passwordRegister : string= '';
-
-  constructor(private authService: AuthService,private loginService: LoginService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   login(): void {
     this.loginService.login(this.username, this.password).subscribe(
-      response => {
+      (response) => {
         // Gérer la réponse de l'API
-        if (response && response.message === 'Authentification réussie') {
+        if (
+          response &&
+          response.message === 'Authentification réussie' &&
+          this.username === 'destin'
+        ) {
           // Redirection vers la page HTML souhaitée
-          this.authService.login();
-          this.router.navigate(['/accueil']);}
-        
-      },
-      
-      error => {
-        console.log("ça a foiréeeee");
 
+          this.authService.login();
+          this.router.navigate(['/accueil']);
+        } else {
+          // Redirection vers la page HTML souhaitée
+
+          this.authService.login();
+          this.router.navigate(['/dashboard']);
+        }
+      },
+
+      (error) => {
         console.error(error);
-        
       }
     );
   }
@@ -42,16 +52,18 @@ export class LoginComponent {
     this.router.navigate(['/acceuil']);
   }
   register(): void {
-    this.loginService.register(this.usernameRegister, this.passwordRegister).subscribe(
-      response => {
-        // Gérer la réponse de l'API
-        this.passwordRegister = "";
-        this.usernameRegister = "";
-        console.log(response);
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    this.loginService
+      .register(this.usernameRegister, this.passwordRegister)
+      .subscribe(
+        (response) => {
+          // Gérer la réponse de l'API
+          this.passwordRegister = '';
+          this.usernameRegister = '';
+          console.log(response);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   }
 }
