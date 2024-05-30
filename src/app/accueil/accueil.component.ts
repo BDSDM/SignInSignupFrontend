@@ -7,12 +7,16 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
-  styleUrls: ['./accueil.component.css']
+  styleUrls: ['./accueil.component.css'],
 })
 export class AccueilComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private authService: AuthService,private router: Router, private accueilService: AccueilService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private accueilService: AccueilService
+  ) {}
 
   ngOnInit(): void {
     this.displayUsers();
@@ -25,10 +29,10 @@ export class AccueilComponent implements OnInit {
 
   displayUsers() {
     this.accueilService.getAllUsers().subscribe(
-      data => {
+      (data) => {
         this.users = data;
       },
-      error => {
+      (error) => {
         console.error('There was an error!', error);
       }
     );
@@ -37,9 +41,9 @@ export class AccueilComponent implements OnInit {
     this.accueilService.deleteUser(id).subscribe(
       () => {
         // Supprimer l'utilisateur localement après une suppression réussie
-        this.users = this.users.filter(user => user.id !== id);
+        this.users = this.users.filter((user) => user.id !== id);
       },
-      error => {
+      (error) => {
         console.error('There was an error deleting the user!', error);
       }
     );
