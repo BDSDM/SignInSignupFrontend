@@ -7,7 +7,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'accueil', component: AccueilComponent, canActivate: [AuthGuard] },
+  {
+    path: 'accueil',
+    component: AccueilComponent,
+    canActivate: [AuthGuard],
+    data: { expectedRole: 'destin' },
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
   {

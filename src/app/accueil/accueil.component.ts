@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 })
 export class AccueilComponent implements OnInit {
   users: User[] = [];
+  username: string = '';
 
   constructor(
     private authService: AuthService,
@@ -20,6 +21,7 @@ export class AccueilComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayUsers();
+    this.username = this.authService.getUsername();
   }
 
   logOut() {
