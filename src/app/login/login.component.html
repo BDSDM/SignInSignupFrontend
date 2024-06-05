@@ -1,16 +1,19 @@
 <!-- auth.component.html -->
 
 <div>
-    <h2>Login</h2>
-    <input type="text" [(ngModel)]="username" placeholder="Username">
-    <input type="password" [(ngModel)]="password" placeholder="Password">
-    <button (click)="login()">Login</button>
-  </div>
-  
-  <div>
-    <h2>Register</h2>
-    <input type="text" [(ngModel)]="usernameRegister" placeholder="Username">
-    <input type="password" [(ngModel)]="passwordRegister" placeholder="Password">
-    <button (click)="register()">Register</button>
-  </div>
+  <h2>Login</h2>
+  <input type="text" [(ngModel)]="username" placeholder="Username" />
+  <input type="password" [(ngModel)]="password" placeholder="Password" />
+  <button (click)="login()">Login</button>
+</div>
 
+<div>
+  <h2>Register</h2>
+  <input type="text" [(ngModel)]="usernameRegister" placeholder="Username" />
+  <input
+    type="password"
+    [(ngModel)]="passwordRegister"
+    placeholder="Password"
+  />
+  <button (click)="register()">Register</button>
+</div>

@@ -23,23 +23,22 @@ export class LoginComponent {
   ) {}
 
   login(): void {
+    const role = this.username;
+
     this.loginService.login(this.username, this.password).subscribe(
       (response) => {
         // Gérer la réponse de l'API
-        if (
-          response &&
-          response.message === 'Authentification réussie' &&
-          this.username === 'destin'
-        ) {
-          // Redirection vers la page HTML souhaitée
+        if (response && response.message === 'Authentification réussie') {
+          if (this.username === 'destin') {
+            // Redirection vers la page HTML souhaitée
+            this.authService.login(this.username, role);
+            this.router.navigate(['/accueil']);
+          } else {
+            // Redirection vers la page HTML souhaitée
+            this.authService.login(this.username, role);
 
-          this.authService.login();
-          this.router.navigate(['/accueil']);
-        } else {
-          // Redirection vers la page HTML souhaitée
-
-          this.authService.login();
-          this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard']);
+          }
         }
       },
 
