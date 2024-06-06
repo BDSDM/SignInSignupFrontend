@@ -5,20 +5,19 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuardUser implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const expectedRole = route.data['expectedRole'];
-    if (this.authService.getIsAuthenticated()) {
-      if (this.authService.getUserRole() === expectedRole) {
-        return true;
-      } else {
-        this.router.navigate(['/dashboard']);
-        return false;
-      }
+
+    if (
+      this.authService.getIsAuthenticated() &&
+      this.authService.getUserRole() != 'destin'
+    ) {
+      return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/accueil']);
       return false;
     }
   }
