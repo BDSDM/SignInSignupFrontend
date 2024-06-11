@@ -15,7 +15,9 @@
   <ul>
     <li *ngFor="let user of users">
       {{ user.username }}
-      <button (click)="deleteUser(user.id)">Delete</button>
+      <button (click)="deleteUser(user.id)" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Delete
+      </button>
     </li>
   </ul>
 </div>
