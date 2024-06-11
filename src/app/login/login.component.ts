@@ -15,13 +15,20 @@ export class LoginComponent {
   password: string = '';
   usernameRegister: string = '';
   passwordRegister: string = '';
+  newAccount = false;
 
   constructor(
     private authService: AuthService,
     private loginService: LoginService,
     private router: Router
   ) {}
-
+  ngOnInit(): void {
+    // Charger l'état depuis le localStorage lors de l'initialisation
+    const storedNewAccount = localStorage.getItem('showText');
+    if (storedNewAccount !== null) {
+      this.newAccount = JSON.parse(storedNewAccount);
+    }
+  }
   login(): void {
     const role = this.username;
 
@@ -46,6 +53,14 @@ export class LoginComponent {
         console.error(error);
       }
     );
+  }
+  createNewAccount() {
+    this.newAccount = !this.newAccount;
+    localStorage.setItem('showText', JSON.stringify(this.newAccount));
+  }
+  signIn() {
+    this.newAccount = !this.newAccount;
+    localStorage.setItem('showText', JSON.stringify(this.newAccount));
   }
   onLoginSuccess() {
     this.router.navigate(['/acceuil']);
