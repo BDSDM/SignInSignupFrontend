@@ -4,3 +4,25 @@
 </div>
 <button (click)="logOut()">Déconnexion</button>
 <p>dashboard works!</p>
+<!-- src/app/components/add-todo/add-todo.component.html -->
+<div class="input-group mb-3">
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="title"
+    placeholder="Add a new task"
+  />
+  <button class="btn btn-primary" (click)="addTodo()">Add</button>
+</div>
+
+<div class="container">
+  <h2>To-Do List</h2>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let todo of todos">
+      {{ todo.title }}
+      <button class="btn btn-danger float-right" (click)="deleteToDo(todo.id)">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
