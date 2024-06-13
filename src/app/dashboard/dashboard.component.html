@@ -1,28 +1,55 @@
-<!-- dashboard.component.html -->
-<div>
-  <h2>Bienvenue sur le Dashboard, {{ username }} !</h2>
-</div>
-<button (click)="logOut()">Déconnexion</button>
-<p>dashboard works!</p>
-<!-- src/app/components/add-todo/add-todo.component.html -->
-<div class="input-group mb-3">
-  <input
-    type="text"
-    class="form-control"
-    [(ngModel)]="title"
-    placeholder="Add a new task"
-  />
-  <button class="btn btn-primary" (click)="addTodo()">Add</button>
-</div>
+<div
+  class="card mb-4 bg-secondary d-flex justify-content-center"
+  style="
+    width: 50rem;
+    max-width: 90%;
+    margin-left: 15rem;
+    height: 100vh;
+    margin-top: 10vh;
+  "
+>
+  <!-- dashboard.component.html -->
+  <div>
+    <h2>Bienvenue sur le Dashboard, {{ username }} !</h2>
+  </div>
+  <button
+    (click)="logOut()"
+    style="margin-bottom: 1rem; width: 10rem"
+    class="btn btn-dark"
+  >
+    Déconnexion
+  </button>
+  <!-- src/app/components/add-todo/add-todo.component.html -->
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="title"
+      placeholder="Add a new task"
+    />
+    <button class="btn btn-primary" (click)="addTodo()">Add</button>
+  </div>
 
-<div class="container">
-  <h2>To-Do List</h2>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let todo of todos">
-      {{ todo.title }}
-      <button class="btn btn-danger float-right" (click)="deleteToDo(todo.id)">
-        Delete
-      </button>
-    </li>
-  </ul>
+  <div
+    *ngIf="todos.length > 0; else noTodos"
+    class="container"
+    style="overflow: auto"
+  >
+    <h2>To-Do List</h2>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let todo of todos">
+        {{ todo.title }}
+        <button
+          class="btn btn-danger float-right"
+          (click)="deleteToDo(todo.id)"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noTodos>
+    <p>No ToDos found for this user.</p>
+  </ng-template>
 </div>

@@ -1,5 +1,7 @@
+// src/app/models/todo.model.ts
 export class ToDo {
-  id: number | undefined;
-  title: string | undefined;
-  completed: boolean | undefined;
+  id?: number;
+  title?: string;
+  completed?: boolean;
+  userId?: number;
 }

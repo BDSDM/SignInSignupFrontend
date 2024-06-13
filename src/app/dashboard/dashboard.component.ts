@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { DashboardService } from './dashboard.service';
@@ -14,6 +14,7 @@ export class DashboardComponent {
   username: string = '';
   todos: ToDo[] = [];
   todoAdded: any;
+  @Input() userId!: number;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -21,19 +22,29 @@ export class DashboardComponent {
   ) {}
   ngOnInit(): void {
     this.username = this.authService.getUsername();
-    this.getToDos();
+    this.getToDosById();
   }
   logOut() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
   getToDos(): void {
-    this.dashboardService.getToDos().subscribe((todos) => (this.todos = todos));
+    this.dashboardService.getToDos().subscribe((todos) => {
+      this.todos = todos.filter((todo) => todo.userId === this.userId);
+    });
+  }
+  getToDosById(): void {
+    this.dashboardService
+      .getToDosByUser(this.username)
+      .subscribe((data: ToDo[]) => {
+        this.todos = data;
+      });
   }
   deleteToDo(id: number | undefined): void {
     if (id !== undefined) {
-      this.dashboardService.deleteToDo(id).subscribe(() => {
-        this.getToDos();
+      this.dashboardService.deleteToDo(this.username, id).subscribe(() => {
+        this.getToDosById();
       });
     } else {
       console.error('Todo ID is undefined.');
@@ -45,9 +56,9 @@ export class DashboardComponent {
       completed: false,
       id: undefined,
     };
-    this.dashboardService.createToDo(newTodo).subscribe(() => {
+    this.dashboardService.createToDo(this.username, newTodo).subscribe(() => {
       this.title = '';
-      this.getToDos();
+      this.getToDosById();
     });
   }
 }

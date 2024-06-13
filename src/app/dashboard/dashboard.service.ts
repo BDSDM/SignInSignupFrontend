@@ -15,15 +15,18 @@ export class DashboardService {
     return this.http.get<ToDo[]>(this.baseUrl);
   }
 
-  createToDo(todo: ToDo): Observable<ToDo> {
-    return this.http.post<ToDo>(this.baseUrl, todo);
+  createToDo(username: string, todo: ToDo): Observable<ToDo> {
+    return this.http.post<ToDo>(`${this.baseUrl}/${username}`, todo);
   }
 
   updateToDo(id: number, todo: ToDo): Observable<ToDo> {
     return this.http.put<ToDo>(`${this.baseUrl}/${id}`, todo);
   }
 
-  deleteToDo(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  deleteToDo(username: string, id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${username}/${id}`);
+  }
+  getToDosByUser(username: string): Observable<ToDo[]> {
+    return this.http.get<ToDo[]>(`${this.baseUrl}/${username}`);
   }
 }
