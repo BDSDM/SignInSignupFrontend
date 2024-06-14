@@ -2,7 +2,7 @@
 
 <div
   *ngIf="!newAccount"
-  class="card mb-4 bg-primary d-flex justify-content-center align-items-center"
+  class="card mb-4 bg-white d-flex justify-content-center align-items-center"
   style="
     width: 24rem;
     max-width: 90%;
@@ -12,6 +12,10 @@
   "
 >
   <h2>Login</h2>
+  <p>
+    Not member yet?
+    <a href="#" (click)="createNewAccount()">Register</a>
+  </p>
   <input type="text" [(ngModel)]="username" placeholder="Username" />
   <input
     class="mt-3"
@@ -19,25 +23,21 @@
     [(ngModel)]="password"
     placeholder="Password"
   />
-  <button
-    (click)="login()"
-    class="btn btn-dark mt-3"
-    style="margin-left: -7rem"
-  >
+  <button (click)="login()" class="btn btn-dark mt-3" style="width: 12rem">
     Login
   </button>
-  <button
-    (click)="createNewAccount()"
-    style="margin-left: 5rem"
-    class="btn btn-secondary"
+  <div
+    *ngIf="errorMessageConnexion"
+    class="error-message card mb-4 bg-dark text-white"
+    style="margin-top: 2rem"
   >
-    New user
-  </button>
+    <p>Identifiant ou mot de passe incorrect</p>
+  </div>
 </div>
 
 <div
   *ngIf="newAccount"
-  class="card mb-4 bg-primary d-flex justify-content-center align-items-center"
+  class="card mb-4 bg-white d-flex justify-content-center align-items-center"
   style="
     width: 24rem;
     max-width: 90%;
@@ -47,6 +47,10 @@
   "
 >
   <h2>Register</h2>
+  <p>
+    Already registered?
+    <a href="#" (click)="signIn()">Login</a>
+  </p>
   <input type="text" [(ngModel)]="usernameRegister" placeholder="Username" />
   <input
     class="mt-3"
@@ -54,18 +58,23 @@
     [(ngModel)]="passwordRegister"
     placeholder="Password"
   />
-  <button
-    class="btn btn-dark mt-3"
-    (click)="register()"
-    style="margin-left: -7rem"
-  >
+  <button class="btn btn-dark mt-3" (click)="register()" style="width: 12rem">
     Register
   </button>
-  <button
-    (click)="signIn()"
-    style="margin-left: 5rem"
-    class="btn btn-secondary"
+
+  <div
+    *ngIf="errorMessage"
+    class="error-message card mb-4 bg-dark text-white"
+    style="margin-top: 2rem"
   >
-    Sign In
-  </button>
+    {{ errorMessage }}
+  </div>
+
+  <div
+    *ngIf="registeredWithSuccess"
+    class="error-message card mb-4 bg-dark text-white"
+    style="margin-top: 2rem"
+  >
+    Utilisateur enregistré avec succès
+  </div>
 </div>
