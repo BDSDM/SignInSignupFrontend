@@ -16,6 +16,9 @@ export class LoginComponent {
   usernameRegister: string = '';
   passwordRegister: string = '';
   newAccount = false;
+  errorMessage: string = '';
+  registeredWithSuccess = false;
+  errorMessageConnexion: string = '';
 
   constructor(
     private authService: AuthService,
@@ -35,9 +38,11 @@ export class LoginComponent {
     this.loginService.login(this.username, this.password).subscribe(
       (response) => {
         // Gérer la réponse de l'API
-        if (response && response.message === 'Authentification réussie') {
+        if (response && response.message === 'Connexion réussie') {
+          this.errorMessageConnexion = '';
           if (this.username === 'destin') {
             // Redirection vers la page HTML souhaitée
+
             this.authService.login(this.username, role);
             this.router.navigate(['/accueil']);
           } else {
@@ -50,7 +55,10 @@ export class LoginComponent {
       },
 
       (error) => {
+        console.log('errrrrrrrrrrrrrrrrrrrrr' + error);
+
         console.error(error);
+        this.errorMessageConnexion = error;
       }
     );
   }
@@ -73,10 +81,13 @@ export class LoginComponent {
           // Gérer la réponse de l'API
           this.passwordRegister = '';
           this.usernameRegister = '';
-          console.log(response);
+          this.errorMessage = '';
+          this.registeredWithSuccess = true;
         },
         (error) => {
           console.error(error);
+          this.errorMessage = error;
+          this.registeredWithSuccess = false;
         }
       );
   }
