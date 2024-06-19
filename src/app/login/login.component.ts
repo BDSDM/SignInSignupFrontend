@@ -55,8 +55,6 @@ export class LoginComponent {
       },
 
       (error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrr' + error);
-
         console.error(error);
         this.errorMessageConnexion = error;
       }

@@ -10,24 +10,32 @@
 >
   <!-- dashboard.component.html -->
   <div>
-    <h2>Bienvenue sur le Dashboard, {{ username }} !</h2>
+    <h2 style="margin-left: 1rem">
+      Bienvenue sur le Dashboard, {{ username }} !
+    </h2>
   </div>
   <button
     (click)="logOut()"
-    style="margin-bottom: 1rem; width: 10rem"
+    style="margin-bottom: 1rem; width: 10rem; margin-left: 1rem"
     class="btn btn-dark"
   >
     Déconnexion
   </button>
   <!-- src/app/components/add-todo/add-todo.component.html -->
-  <div class="input-group mb-3">
+  <div class="input-group mb-3" style="margin-left: 1rem">
     <input
       type="text"
       class="form-control"
       [(ngModel)]="title"
       placeholder="Add a new task"
     />
-    <button class="btn btn-primary" (click)="addTodo()">Add</button>
+    <button
+      class="btn btn-primary"
+      (click)="addTodo()"
+      style="margin-right: 2rem"
+    >
+      Add
+    </button>
   </div>
 
   <div
