@@ -1,0 +1,99 @@
+<div class="container mt-4">
+  <!-- Récupérer une identité -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">Fetch Identity</div>
+    <div class="card-body">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="username"
+          placeholder="Enter username"
+        />
+        <button class="btn btn-primary" (click)="fetchIdentity()">
+          Fetch Identity
+        </button>
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success mt-2">
+        {{ successMessage }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Affichage de l'identité -->
+  <div *ngIf="identity" class="card mb-4">
+    <div class="card-header bg-info text-white">Identity Details</div>
+    <div class="card-body">
+      <p>First Name: {{ identity.firstName }}</p>
+      <p>Last Name: {{ identity.lastName }}</p>
+      <p>Email: {{ identity.email }}</p>
+      <p>Phone Number: {{ identity.phoneNumber }}</p>
+      <p>Username: {{ identity.user.username }}</p>
+      <button class="btn btn-danger" (click)="deleteIdentity()">
+        Delete Identity
+      </button>
+    </div>
+  </div>
+
+  <!-- Créer une identité -->
+  <div class="card">
+    <div class="card-header bg-success text-white">Create Identity</div>
+    <div class="card-body">
+      <form (ngSubmit)="createIdentity()">
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="newIdentity.user.username"
+            name="username"
+            placeholder="Enter username"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="newIdentity.firstName"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="newIdentity.lastName"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="newIdentity.email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="newIdentity.phoneNumber"
+            name="phoneNumber"
+            placeholder="Phone Number"
+          />
+        </div>
+        <button type="submit" class="btn btn-success">Create Identity</button>
+      </form>
+    </div>
+  </div>
+</div>
