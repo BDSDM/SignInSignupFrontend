@@ -8,22 +8,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { AccueilComponent } from './accueil/accueil.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { IdentityComponent } from './identity/identity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    IdentityComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
