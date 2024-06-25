@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Identity } from '../dashboard/identity.model';
 import { DashboardService } from '../dashboard/dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-identity',
@@ -20,7 +21,10 @@ export class IdentityComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -85,5 +89,17 @@ export class IdentityComponent implements OnInit {
           }
         );
     }
+  }
+  returnToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+  isFormValid(): boolean {
+    return (
+      this.newIdentity.user.username.trim() !== '' &&
+      this.newIdentity.firstName.trim() !== '' &&
+      this.newIdentity.lastName.trim() !== '' &&
+      this.newIdentity.email.trim() !== '' &&
+      this.newIdentity.phoneNumber.trim() !== ''
+    );
   }
 }

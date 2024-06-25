@@ -6,12 +6,17 @@ import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardUser } from './authUser.guard';
 import { IdentityComponent } from './identity/identity.component';
+import { AuthGuardIdentity } from './authIdentity.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'identity', component: IdentityComponent },
 
-  { path: 'identite', redirectTo: '/identity', pathMatch: 'full' },
+  {
+    path: 'identite',
+    component: IdentityComponent,
+    canActivate: [AuthGuardIdentity],
+  },
 
   {
     path: 'accueil',
