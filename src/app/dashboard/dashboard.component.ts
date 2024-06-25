@@ -61,4 +61,7 @@ export class DashboardComponent {
       this.getToDosById();
     });
   }
+  directToInfos() {
+    this.router.navigate(['/identite']);
+  }
 }
